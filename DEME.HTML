@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>    
+</head>
+<body>
+    
+
+
+
+
+
+<a href="product-details.html?id=1">Essential Structured Blazer</a>
+<a href="product-details.html?id=2">Buttons Tweed Blazer</a>
+
+
+
+
+
+<script>
+    const products = [
+  {
+    id: 1,
+    name: "Essential Structured Blazer",
+    brand: "SKMEI",
+    price: 75,
+    oldPrice: 83,
+    description: "Premium structured blazer with modern design.",
+    images: [
+      "C:\Users\hariv\Desktop\bkv\img\product\product-1.jpg",
+      "img/product/details/product-2.jpg",
+      "img/product/details/product-3.jpg",
+      "img/product/details/product-4.jpg"
+    ],
+    colors: ["red", "black", "grey"],
+    sizes: ["XS", "S", "M", "L"],
+    stock: true,
+    reviews: 138
+  },
+  {
+    id: 2,
+    name: "Buttons Tweed Blazer",
+    brand: "H&M",
+    price: 59,
+    oldPrice: 70,
+    description: "Classic tweed blazer for formal looks.",
+    images: [
+      "img/product/related/rp-1.jpg"
+    ],
+    colors: ["black", "beige"],
+    sizes: ["S", "M", "L"],
+    stock: true,
+    reviews: 95
+  }
+];
+
+</script>
+<script src="products.js"></script>
+<script>
+  // Get product ID from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = parseInt(urlParams.get("id"));
+
+  // Find product by ID
+  const product = products.find(p => p.id === productId);
+
+  if (product) {
+    // Set product data
+    document.querySelector(".product__details__text h3").innerHTML =
+      `${product.name} <span>Brand: ${product.brand}</span>`;
+    document.querySelector(".product__details__price").innerHTML =
+      `$ ${product.price}.0 <span>$ ${product.oldPrice}.0</span>`;
+    document.querySelector(".product__details__text p").textContent = product.description;
+
+    // Stock
+    document.querySelector("#stockin").checked = product.stock;
+
+    // Reviews
+    document.querySelector(".rating span").textContent = `( ${product.reviews} reviews )`;
+
+    // Images
+    const slider = document.querySelector(".product__details__pic__slider");
+    slider.innerHTML = ""; // clear existing
+    product.images.forEach((img, i) => {
+      slider.innerHTML += `<img data-hash="product-${i+1}" class="product__big__img" src="${img}" alt="">`;
+    });
+  }
+</script>
+
+
+
+
+    
+</body>
+</html>
